@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #00c6ff, #0072ff);
+            padding: 30px;
+        }
+
+        .container { 
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0px 10px 25px rgba(0,0,0,0.2);
+            max-width: 900px;
+            margin: auto;
+            text-align: center;
+        }
+
+        h2 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        input {
+            width: 80%;
+            padding: 10px;
+            margin: 8px 0;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        input:focus {
+            border-color: #0072ff;
+            box-shadow: 0px 0px 5px #0072ff;
+        }
+
+        button {
+            width: 85%;
+            padding: 12px;
+            background: linear-gradient(135deg, #ff7eb3, #ff758c);
+            border: none;
+            color: white;
+            font-size: 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            transform: scale(1.05);
+            opacity: 0.9;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 25px;
+        }
+
+        th {
+            background: linear-gradient(135deg, #43cea2, #185a9d);
+            color: white;
+            padding: 10px;
+        }
+
+        td {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+
+        .rating {
+            color: #ff758c;
+            font-weight: bold;
+        }
+
+        .message {
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .success {
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+        .error {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+
+    </style>
+
+</head>
+<body>
+
+<div class="container">
+
+<h2>👨‍💼 Admin Login</h2>
+
+<form method="POST">
+    <input type="email" name="email" placeholder="Enter Admin Email" required><br>
+    <input type="password" name="password" placeholder="Enter Password" required><br>
+
+    <button type="submit">Login</button>
+</form>
+
+{% if feedbacks %}
+<h2>📊 All Feedback</h2>
+
+<table>
+<tr>
+    <th>Student</th>
+    <th>Faculty</th>
+    <th>Rating</th>
+    <th>Comments</th>
+</tr>
+
+{% for fb, fac, stu in feedbacks %}
+<tr>
+    <td>{{ stu.name }}</td>
+    <td>{{ fac.name }}</td>
+    <td class="rating">⭐ {{ fb.rating }}</td>
+    <td>{{ fb.comments }}</td>
+</tr>
+{% endfor %}
+
+</table>
+{% endif %}
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% for category, message in messages %}
+    <div class="message {{ category }}">{{ message }}</div>
+  {% endfor %}
+{% endwith %}
+
+</div>
+
+</body>
+</html>

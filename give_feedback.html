@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Give Feedback</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #43cea2, #185a9d);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            background: white;
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: 0px 10px 25px rgba(0,0,0,0.2);
+            width: 400px;
+            text-align: center;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        select, input, textarea {
+            width: 90%;
+            padding: 10px;
+            margin: 8px 0;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        select:focus, input:focus, textarea:focus {
+            border-color: #43cea2;
+            box-shadow: 0px 0px 5px #43cea2;
+        }
+
+        textarea {
+            height: 80px;
+            resize: none;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, #ff9966, #ff5e62);
+            border: none;
+            color: white;
+            font-size: 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            transform: scale(1.05);
+            opacity: 0.9;
+        }
+
+        a {
+            display: inline-block;
+            margin-top: 15px;
+            text-decoration: none;
+            color: #185a9d;
+            font-weight: bold;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .message {
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .success {
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+        .error {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+
+    </style>
+
+</head>
+<body>
+
+<div class="container">
+
+<h2>⭐ Give Feedback</h2>
+
+<form method="POST">
+
+    <select name="faculty_id" required>
+        <option value="">Select Faculty</option>
+        {% for f in faculty %}
+            <option value="{{ f.faculty_id }}">{{ f.name }} - {{ f.subject }}</option>
+        {% endfor %}
+    </select>
+
+    <input type="number" name="rating" min="1" max="5" placeholder="Rating (1-5)" required>
+
+    <textarea name="comments" placeholder="Enter your comments..."></textarea>
+
+    <button type="submit">Submit Feedback</button>
+</form>
+
+<a href="/dashboard">⬅ Back to Dashboard</a>
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% for category, message in messages %}
+    <div class="message {{ category }}">{{ message }}</div>
+  {% endfor %}
+{% endwith %}
+
+</div>
+
+</body>
+</html>

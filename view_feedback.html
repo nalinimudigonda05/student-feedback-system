@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Feedback</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            padding: 30px;
+        }
+
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0px 10px 25px rgba(0,0,0,0.2);
+            max-width: 900px;
+            margin: auto;
+            text-align: center;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        th {
+            background: linear-gradient(135deg, #36d1dc, #5b86e5);
+            color: white;
+            padding: 10px;
+        }
+
+        td {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+
+        .rating {
+            font-weight: bold;
+            color: #ff7eb3;
+        }
+
+        a {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            text-decoration: none;
+            background: linear-gradient(135deg, #ff9966, #ff5e62);
+            color: white;
+            border-radius: 8px;
+            transition: 0.3s;
+        }
+
+        a:hover {
+            transform: scale(1.05);
+            opacity: 0.9;
+        }
+
+    </style>
+
+</head>
+<body>
+
+<div class="container">
+
+<h2>📄 My Feedback</h2>
+
+<table>
+
+<tr>
+    <th>👨‍🏫 Faculty</th>
+    <th>📘 Subject</th>
+    <th>⭐ Rating</th>
+    <th>💬 Comments</th>
+    <th>📅 Date</th>
+    <th>⏰ Time</th>
+</tr>
+
+{% for fb, fac in feedbacks %}
+<tr>
+    <td>{{ fac.name }}</td>
+    <td>{{ fac.subject }}</td>
+    <td class="rating">⭐ {{ fb.rating }}</td>
+    <td>{{ fb.comments }}</td>
+
+    <td>{{ fb.date.strftime('%d-%m-%Y') }}</td>
+    <td>{{ fb.date.strftime('%I:%M %p') }}</td>
+</tr>
+{% endfor %}
+
+</table>
+
+<a href="/dashboard">⬅ Back to Dashboard</a>
+
+</div>
+
+</body>
+</html>

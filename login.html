@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 350px;
+            margin: 80px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0px 8px 20px rgba(0,0,0,0.2);
+            text-align: center;
+        }
+
+        h2 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        h3 {
+            color: #764ba2;
+        }
+
+        input {
+            width: 90%;
+            padding: 10px;
+            margin: 8px 0;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        input:focus {
+            border-color: #667eea;
+            box-shadow: 0px 0px 5px #667eea;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background: linear-gradient(135deg, #ff7eb3, #ff758c);
+            border: none;
+            color: white;
+            font-size: 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: linear-gradient(135deg, #ff758c, #ff7eb3);
+            transform: scale(1.05);
+        }
+
+        a {
+            display: inline-block;
+            margin-top: 10px;
+            color: #667eea;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .message {
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .success {
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+        .error {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+
+    </style>
+
+</head>
+<body>
+
+<div class="container">
+
+<h2>Student Login</h2>
+
+{% if forgot %}
+    <h3>Reset Password</h3>
+    <form method="POST">
+        <input type="email" name="email" placeholder="Enter Email" required><br>
+        <input type="password" name="new_password" placeholder="New Password" required><br>
+        <input type="password" name="confirm_password" placeholder="Confirm Password" required><br>
+
+        <button type="submit" name="reset">Reset Password</button>
+    </form>
+
+    <a href="/login">Back to Login</a>
+
+{% else %}
+
+    <form method="POST">
+        <input type="email" name="email" placeholder="Enter Email" required><br>
+        <input type="password" name="password" placeholder="Enter Password" required><br>
+
+        <button type="submit" name="login">Login</button>
+    </form>
+
+    <a href="/login?forgot=1">Forgot Password?</a><br>
+    <a href="/register">Register</a>
+
+{% endif %}
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% for category, message in messages %}
+    <div class="message {{ category }}">{{ message }}</div>
+  {% endfor %}
+{% endwith %}
+
+</div>
+
+</body>
+</html>
